@@ -20,7 +20,7 @@ Collector.prototype.collect = function(root, option) {
 
 	var ary = [], queue = [root];
 	while(queue.length > 0) {
-		var folder = queue.shift();
+		var folder = queue.pop();
 		fs.readdirSync(folder).forEach(function (file) {
 			var item = path.parse(file);
 			var pathname = path.join(folder, file);
