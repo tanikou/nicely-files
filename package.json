@@ -1,6 +1,6 @@
 {
   "name": "nicely-files",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "nicely-files",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,5 @@
     "type": "git",
     "url": "https://github.com/tanikou/nicely-files.git"
   },
-  "license": "MIT",
-  "readme": "收集文件夹下的所有文件"
+  "license": "MIT"
 }
