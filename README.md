@@ -1,4 +1,4 @@
-做这个是原因是因为我在项目中注册express路由是是注册routes文件夹下所有的路由，还有就是项目需要把views下的所有js全部全部bowersify和uglify。**所以我需要取得某文件夹下的某文件,包括子目录下的文件**，所以我写了这个 **nicely-files** 的小东西
+做这个是原因是因为我在项目中注册express路由是是注册routes文件夹下所有的路由，还有就是项目需要把views下的所有js全部全部bowersify和uglify。**所以我需要取得某文件夹下的某些文件,包括子目录下的文件**（约定大于配置，对应文件都放约定的位置然后自动处理），所以我写了这个 **nicely-files** 的小东西
 
 ```javascript 
 npm intall nicely-files
