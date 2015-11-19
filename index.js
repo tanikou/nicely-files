@@ -31,9 +31,7 @@ Collector.prototype.collect = function(root, option) {
 			} else if (match(o.ext, file)) {
 			} else { return; }
 
-			if (match(o.not, file)) {
-				return;
-			}
+			if (match(o.not, file)) { return; }
 
 			ary.push(pathname);
 
