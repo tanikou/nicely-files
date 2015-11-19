@@ -4,9 +4,18 @@ var path = require('path');
 var Collector = function () {
 }
 Collector.prototype.collect = function(root, option) {
-	option     = option || {};
-	option.abs = !!option.abs;
-	option.ext = !option.ext ? [] : Array.isArray(option.ext) ? option.ext : [option.ext];
+	var o = option || {};
+	o.abs  = !!o.abs;
+	o.ext  = !o.ext ? [] : Array.isArray(o.ext) ? o.ext : [o.ext];
+	o.not  = !o.not ? [] : Array.isArray(o.not) ? o.not : [o.not];
+	//o.each = function (file) { return true; };
+
+	function match (ary, name) {
+		return ary.some(function (ext) {
+			// 判断文件名是否是此后缀
+			return name.indexOf(ext, name.length - ext.length) !== -1;
+		});
+	}
 
 	var ary = [], queue = [root];
 	while(queue.length > 0) {
@@ -15,16 +24,18 @@ Collector.prototype.collect = function(root, option) {
 			var item = path.parse(file);
 			var pathname = path.join(folder, file);
 
-			if (fs.statSync(pathname).isDirectory()) {
-				queue.push(pathname);
+			if (fs.statSync(pathname).isDirectory()) { queue.push(pathname); return; }
+			if (o.each && false === o.each(pathname)) { return; }
 
-			} else if (option.ext.length == 0) {
-				ary.push(pathname);
+			if (o.ext.length == 0) {
+			} else if (match(o.ext, file)) {
+			} else { return; }
 
-			} else if (option.ext.indexOf(item.ext) > -1) {
-				ary.push(pathname);
-
+			if (match(o.not, file)) {
+				return;
 			}
+
+			ary.push(pathname);
 
 		}.bind(this));
 	}
