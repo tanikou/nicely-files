@@ -2,7 +2,6 @@ var files = require('./index');
 var path  = require('path');
 
 var root  = path.resolve('./');
-root = 'd:/exe';
 var start = new Date();
 var ary   = files.collect(root);
 var end   = new Date();
