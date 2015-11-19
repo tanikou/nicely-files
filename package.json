@@ -1,0 +1,25 @@
+{
+  "name": "nicely-files",
+  "version": "0.0.1",
+  "description": "nicely-files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "files",
+    "nicely-files"
+  ],
+  "author": {
+    "name": "victan",
+    "email": "vcitan@qq.com"
+  },
+  "dependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tanikou/nicely-files.git"
+  },
+  "license": "MIT",
+  "readme": "nicely-files for nodejs"
+}
