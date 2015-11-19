@@ -5,9 +5,10 @@ var Collector = function () {
 }
 Collector.prototype.collect = function(root, option) {
 	var o = option || {};
-	o.abs  = !!o.abs;
-	o.ext  = !o.ext ? [] : Array.isArray(o.ext) ? o.ext : [o.ext];
-	o.not  = !o.not ? [] : Array.isArray(o.not) ? o.not : [o.not];
+	o.abs = !!o.abs;
+	o.level = isNaN(o.level) ? -1 : o.level;
+	o.ext = !o.ext ? [] : Array.isArray(o.ext) ? o.ext : [o.ext];
+	o.not = !o.not ? [] : Array.isArray(o.not) ? o.not : [o.not];
 	//o.each = function (file) { return true; };
 
 	function match (ary, name) {
@@ -24,7 +25,10 @@ Collector.prototype.collect = function(root, option) {
 			var item = path.parse(file);
 			var pathname = path.join(folder, file);
 
-			if (fs.statSync(pathname).isDirectory()) { queue.push(pathname); return; }
+			if (fs.statSync(pathname).isDirectory()) {
+				if (-1 == o.level) { queue.push(pathname) };
+				return;
+			}
 			if (o.each && false === o.each(pathname)) { return; }
 
 			if (o.ext.length == 0) {
@@ -40,5 +44,15 @@ Collector.prototype.collect = function(root, option) {
 
 	return ary;
 };
+Collector.prototype.all = function (root, option) {
+	option = option || {};
+	option.level = -1;
+	return this.collect(root, option);
+}
+Collector.prototype.top = function (root, option) {
+	option = option || {};
+	option.level = 0;
+	return this.collect(root, option);
+}
 
 module.exports = new Collector();
